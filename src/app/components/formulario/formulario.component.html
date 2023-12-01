@@ -1,0 +1,113 @@
+<div>
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <label for="apellido">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nombre"
+          required
+          [(ngModel)]="cliente.nombre"
+          name="nombre"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="apellido">Apellido</label>
+        <input
+          type="text"
+          class="form-control"
+          id="apellido"
+          required
+          [(ngModel)]="cliente.apellido"
+          name="apellido"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="dni">Dni</label>
+        <input
+          type="number"
+          class="form-control"
+          id="dni"
+          required
+          [(ngModel)]="cliente.dni"
+          name="dni"
+        />
+     
+      </div>
+
+      <div class="form-group">
+        <label for="telefono">Telefono</label>
+        <input
+          type="number"
+          class="form-control"
+          id="telefono"
+          required
+          [(ngModel)]="cliente.telefono"
+          name="telefono"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="mail">Mail</label>
+        <input
+          class="form-control"
+          id="mail"
+          required
+          [(ngModel)]="cliente.mail"
+          name="mail"
+          type="email" 
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="date">Fecha</label>
+        <input class="form-control" id="date" required [(ngModel)]="turno.fecha" name="date" type="date" />
+      </div>
+      
+
+      <div class="form-group">
+        <label for="hora">Hora</label>
+        <input
+          class="form-control"
+          id="hora"
+          required
+          [(ngModel)]="turno.hora"
+          name="hora"
+          type="time" 
+        />
+      </div>
+
+
+      <div class="form-group">
+        <label for="professional">Profesional:</label>
+        <select class="form-control" id="professional" name="professional" [(ngModel)]="profesionalSeleccionado">
+            <option *ngFor="let profesional of profesionales" [value]="profesional.id">{{ profesional.nombre }}</option>
+        </select>
+    </div>
+    
+    <div class="form-group" *ngIf="profesionalSeleccionado">
+        <label for="service">Servicio:</label>
+        <select class="form-control" id="service" name="service" [(ngModel)]="servicioSeleccionado">
+            <ng-container *ngFor="let servicio of servicios">
+                <option [value]="servicio.id" *ngIf="servicio.id === profesionalSeleccionado">{{ servicio.nombre }}</option>
+            </ng-container>
+        </select>
+    </div>
+    
+      
+    
+
+
+
+      <button (click)="submitForm()"   class="btn btn-success">Reservar</button>
+    </div>
+
+    <div *ngIf="submitted">
+      <h4>Turno Creado con exito</h4>
+      <button class="btn btn-success"  (click)="newForm()">Nuevo</button>
+    </div>
+  </div>
+</div>
